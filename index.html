@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Your Name]</title>
+  <meta name="description" content="Sophomore at Yale studying cognitive science. Building tools for biotech research." />
+
+  <!-- Preconnect for faster font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Newsreader (body) and Fraunces (display) — editorial pairing -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #faf7f0;
+      --ink: #1f1f1f;
+      --muted: #6b6155;
+      --accent: #5b3a29;
+      --rule: #e8e1d4;
+      --shadow: rgba(31, 31, 31, 0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.6;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 96px 32px 128px;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header / wordmark */
+    .wordmark {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 80px;
+    }
+
+    /* Hero / name */
+    h1.name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 48px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      font-variation-settings: 'opsz' 144;
+    }
+
+    .tagline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--muted);
+      margin-bottom: 56px;
+    }
+
+    /* Section labels (small caps) */
+    .section-label {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    section {
+      margin-bottom: 72px;
+    }
+
+    section p {
+      margin-bottom: 18px;
+    }
+
+    section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* About paragraph slightly larger */
+    .about p {
+      font-size: 20px;
+      line-height: 1.65;
+    }
+
+    /* Project list */
+    .project {
+      padding-bottom: 32px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .project:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .project h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      font-variation-settings: 'opsz' 36;
+    }
+
+    .project .status {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .project p {
+      font-size: 17px;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    /* Notes list */
+    .notes-list {
+      list-style: none;
+    }
+
+    .note-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .note-item:last-child {
+      border-bottom: none;
+    }
+
+    .note-item a {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: color 0.2s ease;
+    }
+
+    .note-item a:hover {
+      color: var(--accent);
+    }
+
+    .note-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+    }
+
+    .note-date {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .notes-empty {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    /* Links */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* Contact block */
+    .contact a {
+      display: inline-block;
+      margin-right: 20px;
+      font-size: 17px;
+    }
+
+    /* Horizontal rule between major sections */
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: var(--rule);
+      border: none;
+      margin: 0 0 48px;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 64px 24px 96px;
+      }
+
+      h1.name {
+        font-size: 36px;
+      }
+
+      body {
+        font-size: 18px;
+      }
+
+      .note-item a {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .note-date {
+        font-size: 13px;
+      }
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Wordmark / initials -->
+    <div class="wordmark">[Your Initials]</div>
+
+    <!-- Hero -->
+    <h1 class="name">[Your Name]</h1>
+    <p class="tagline">Sophomore at Yale, studying cognitive science. Building tools for biotech research.</p>
+
+    <hr class="divider" />
+
+    <!-- About -->
+    <section class="about">
+      <span class="section-label">About</span>
+      <p>
+        I'm interested in how decisions get made — especially in markets, where the gap between
+        rational behavior and observed behavior is often where the interesting questions live.
+        Most of what I build sits at the intersection of cognitive science, financial data, and
+        applied AI.
+      </p>
+      <p>
+        Currently spending the summer at a biotech-focused hedge fund, building internal research
+        tools. Originally from Hong Kong.
+      </p>
+    </section>
+
+    <!-- Currently -->
+    <section>
+      <span class="section-label">Currently</span>
+      <p>
+        Building an earnings call language analyzer for biotech names — looking for patterns in
+        management hedging, confidence shifts, and tone deltas across quarters. Writing up the
+        first findings.
+      </p>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <span class="section-label">Projects</span>
+
+      <div class="project">
+        <h3>13F Intelligence Tool</h3>
+        <span class="status">In production at a biotech hedge fund</span>
+        <p>
+          Ingests 13F filings from biotech-focused hedge funds, parses positioning data, and
+          surfaces consensus holdings, exit positions, and concentration changes — collapsing what
+          was a multi-hour manual workflow into a single command. Built with Claude Code.
+        </p>
+      </div>
+
+      <div class="project">
+        <h3>Earnings Call Language Analyzer</h3>
+        <span class="status">In development — summer 2026</span>
+        <p>
+          Analyzes biotech earnings call transcripts for hedging patterns, confidence signals, and
+          tone shifts quarter over quarter. Cross-references against clinical catalysts to surface
+          management language deltas around upcoming readouts.
+        </p>
+      </div>
+
+      <div class="project">
+        <h3>Biotech Research Agent</h3>
+        <span class="status">In development — summer 2026 / fall 2026</span>
+        <p>
+          Autonomous research agent that takes a ticker and produces a structured research memo by
+          chaining 13F positioning, earnings language analysis, clinical trial data, and FDA
+          calendar events. The goal: five minutes for what currently takes four hours.
+        </p>
+      </div>
+    </section>
+
+    <!-- Notes -->
+    <section>
+      <span class="section-label">Notes</span>
+      <ul class="notes-list">
+        <!-- Placeholder until the first note is published. Once you publish, replace with:
+        <li class="note-item">
+          <a href="/notes/q1-2026-biotech-hf-positioning.html">
+            <span class="note-title">Q1 2026 — What Biotech HFs Did, and What It Means</span>
+            <span class="note-date">June 2026</span>
+          </a>
+        </li>
+        -->
+        <li class="notes-empty">Coming soon.</li>
+      </ul>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+      <span class="section-label">Contact</span>
+      <p>
+        <a href="mailto:[your.email@yale.edu]">Email</a>
+        <a href="https://linkedin.com/in/[your-handle]" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/[your-handle]" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </section>
+  </div>
+</body>
+</html>
