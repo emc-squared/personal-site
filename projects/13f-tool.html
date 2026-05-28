@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>13F Biotech Intelligence Tool — Emily Chen</title>
+  <meta name="description" content="A tool that ingests WhaleWisdom 13F screenshots and produces a polished biotech hedge fund tracker. In production at Bluestar Global Management." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #faf7f0;
+      --ink: #1f1f1f;
+      --muted: #6b6155;
+      --accent: #5b3a29;
+      --rule: #e8e1d4;
+      --code-bg: #f1ebdc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.65;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 72px 32px 128px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header nav */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 64px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover { color: var(--accent); }
+
+    .nav .home {
+      font-weight: 500;
+    }
+
+    /* Title block */
+    .meta-label {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 42px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      font-variation-settings: 'opsz' 144;
+    }
+
+    .status {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 56px;
+    }
+
+    /* Lede */
+    .lede {
+      font-size: 21px;
+      line-height: 1.55;
+      margin-bottom: 56px;
+      color: var(--ink);
+    }
+
+    /* Section headings */
+    h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-top: 56px;
+      margin-bottom: 20px;
+      font-variation-settings: 'opsz' 36;
+    }
+
+    /* Body paragraphs */
+    p {
+      margin-bottom: 20px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* Pipeline diagram */
+    .pipeline {
+      background: var(--code-bg);
+      border-left: 2px solid var(--accent);
+      padding: 24px 28px;
+      margin: 32px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--ink);
+      white-space: pre;
+      overflow-x: auto;
+      border-radius: 2px;
+    }
+
+    /* Stats / numbers */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 32px 0;
+      padding: 28px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .stat {
+      text-align: left;
+    }
+
+    .stat-value {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      font-variation-settings: 'opsz' 36;
+    }
+
+    .stat-label {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Engineering details list */
+    .eng-list {
+      list-style: none;
+      margin: 24px 0;
+    }
+
+    .eng-list li {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .eng-list li:last-child {
+      border-bottom: none;
+    }
+
+    .eng-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      margin-bottom: 6px;
+      display: block;
+      color: var(--ink);
+    }
+
+    .eng-desc {
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* Inline code */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--accent);
+    }
+
+    /* Links */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--rule);
+      font-size: 14px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .container { padding: 48px 24px 96px; }
+      h1 { font-size: 32px; }
+      .lede { font-size: 19px; }
+      body { font-size: 18px; }
+      .stats { grid-template-columns: 1fr; gap: 16px; }
+      .stat-value { font-size: 24px; }
+      .pipeline { font-size: 11px; padding: 18px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="/" class="home">Emily Chen</a>
+      <a href="/">Index</a>
+    </nav>
+
+    <span class="meta-label">Project</span>
+    <h1>13F Biotech Intelligence Tool</h1>
+    <p class="status">In production at Bluestar Global Management · Q1 2026 onward</p>
+
+    <p class="lede">
+      A tool that turns WhaleWisdom 13F screenshots into a fully-formatted biotech hedge fund tracker, collapsing what was a multi-hour manual workflow into a single command. Twenty-six biotech-focused funds, automatically ingested, filtered, deduplicated, and cross-referenced for consensus signal — every quarter, in about an hour of wall-clock time.
+    </p>
+
+    <h2>What it does</h2>
+
+    <p>
+      Every quarter, biotech hedge funds file 13F disclosures revealing their long positions. Aggregating and analyzing these across a coverage universe is meaningful work — but the manual version of it is tedious, error-prone, and almost entirely transcription. The tool removes that layer.
+    </p>
+
+    <p>
+      Given a folder of screenshots from WhaleWisdom, it extracts every position, applies a configurable policy filter, handles edge cases (exited positions, sub-fund consolidation, pagination artifacts), and produces a polished Excel workbook with three tabs per fund plus a master list and a consensus view. A companion auditor verifies the output against the same source screenshots — a self-consistency check that currently passes for 26 of 26 funds on Q1 2026 data.
+    </p>
+
+    <h2>The pipeline</h2>
+
+    <div class="pipeline">screenshots/
+   ↓
+shared/extractor.py          ← Claude Sonnet 4.6 vision extraction (cached by file hash)
+   ↓
+shared/policy_filter.py      ← three-rule filter: is_equity, is_healthcare, meets_threshold
+   ↓
+   ├── generator/             → polished Excel: MASTER LIST · CONSENSUS · per-fund tabs
+   └── auditor/               → verification against source screenshots</div>
+
+    <h2>By the numbers</h2>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">26 / 26</div>
+        <div class="stat-label">Funds passing self-consistency check</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">~$2</div>
+        <div class="stat-label">Per-quarter API cost</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">~1 hr</div>
+        <div class="stat-label">End-to-end runtime</div>
+      </div>
+    </div>
+
+    <h2>Engineering decisions worth surfacing</h2>
+
+    <ul class="eng-list">
+      <li>
+        <span class="eng-title">Vision extraction over scraping</span>
+        <p class="eng-desc">
+          WhaleWisdom's interface resists clean scraping and changes layout frequently. Extracting from screenshots via Claude Sonnet 4.6 trades a few cents per page for resilience to UI changes — and unlocks structured extraction from a source no scraper would touch.
+        </p>
+      </li>
+      <li>
+        <span class="eng-title">A single policy filter, three rules</span>
+        <p class="eng-desc">
+          Every row passes through one filter that enforces three criteria: equity-only (no warrants, options, or convertible bonds), healthcare-only, and a magnitude threshold of <code>|%Q1| &gt; 0.5</code> or <code>|change| &gt; 0.25pp</code>. Centralizing this logic in one module — rather than scattering it across extractor and writer — makes the rules auditable and policy changes one-line edits.
+        </p>
+      </li>
+      <li>
+        <span class="eng-title">Fund-specific deduplication</span>
+        <p class="eng-desc">
+          Some funds file under multiple legal sub-entities (Foresite Capital Management III, IV, V, VI). The default deduplication strategy keeps the row with the largest position; for known sub-fund cases it sums shares and market values, recomputes percentages from combined values, and takes the maximum prior weight across entities. The strategy is configurable per fund.
+        </p>
+      </li>
+      <li>
+        <span class="eng-title">Exited positions are a separate code path</span>
+        <p class="eng-desc">
+          When a fund fully exits a position, WhaleWisdom shows blank cells rather than zeros — and the extractor was initially misreading these. A dedicated post-processing rule now detects exited rows (zero shares, zero market value) and labels them explicitly, preserving the signal value of a high-conviction position closed in the most recent quarter.
+        </p>
+      </li>
+      <li>
+        <span class="eng-title">Caching by content hash</span>
+        <p class="eng-desc">
+          Extracted rows are cached as JSON files keyed by the MD5 of the source screenshot. Re-runs on unchanged data are free; only modified screenshots trigger fresh API calls. The cache is shared between the generator and the auditor.
+        </p>
+      </li>
+      <li>
+        <span class="eng-title">Verification as a first-class concern</span>
+        <p class="eng-desc">
+          The auditor is a separate tool that reads any generated workbook and re-extracts the source screenshots, comparing field-by-field. When the generator and auditor agree, the pipeline is internally consistent. This isn't a substitute for a domain-expert review, but it catches the entire class of silent transcription errors that would otherwise require manual spot-checks.
+        </p>
+      </li>
+    </ul>
+
+    <h2>What it produces</h2>
+
+    <p>
+      Each quarter, the deliverable is a single Excel workbook with three sheet types: a <strong>master list</strong> of all positions across the coverage universe, a <strong>consensus tab</strong> with cross-fund aggregates (number of funds holding, average weight, signal counts), and one tab per fund. Every tab shares a common ten-column layout, with formulas for quarter-over-quarter change, action labeling (New / Added / Trimmed / Exited / No change), and threshold flagging.
+    </p>
+
+    <p>
+      Charts and analysis derived from a recent run are published in the <a href="/notes/q1-2026-biotech-positioning.html">Q1 2026 Biotech Positioning Brief</a>.
+    </p>
+
+    <h2>Built with</h2>
+
+    <p>
+      Python, <a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">Claude Code</a>, Anthropic API (Sonnet 4.6 for vision), <code>openpyxl</code> for Excel writing. Source remains internal to Bluestar; this page describes architecture and decisions, not implementation.
+    </p>
+
+    <div class="footer">
+      Last updated May 2026.
+    </div>
+
+  </div>
+</body>
+</html>
