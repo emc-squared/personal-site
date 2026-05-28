@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q1 2026 Biotech HF Positioning Brief — Emily Chen</title>
+  <meta name="description" content="Quarterly brief on biotech hedge fund positioning, derived from public 13F filings across 26 biotech-focused funds." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #faf7f0;
+      --ink: #1f1f1f;
+      --muted: #6b6155;
+      --accent: #5b3a29;
+      --rule: #e8e1d4;
+      --pullquote-bg: #f1ebdc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.7;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 32px 128px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 64px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover { color: var(--accent); }
+    .nav .home { font-weight: 500; }
+
+    /* Header */
+    .meta-label {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 44px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+      font-variation-settings: 'opsz' 144;
+    }
+
+    .deck {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .byline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 56px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* Lede */
+    .lede {
+      font-size: 21px;
+      line-height: 1.55;
+      margin-bottom: 48px;
+      color: var(--ink);
+    }
+
+    .lede::first-letter {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 64px;
+      font-weight: 500;
+      float: left;
+      line-height: 0.9;
+      padding: 6px 10px 0 0;
+      color: var(--accent);
+      font-variation-settings: 'opsz' 144;
+    }
+
+    /* Section headings */
+    h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      margin-top: 64px;
+      margin-bottom: 12px;
+      font-variation-settings: 'opsz' 36;
+    }
+
+    .section-kicker {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 64px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-kicker + h2 {
+      margin-top: 0;
+    }
+
+    /* Body */
+    p {
+      margin-bottom: 20px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    em, i {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: 500;
+    }
+
+    /* Charts */
+    .chart {
+      margin: 36px 0 12px;
+    }
+
+    .chart img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+    }
+
+    .chart-caption {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 12px;
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+
+    /* Pull quote / observation */
+    .observation {
+      background: var(--pullquote-bg);
+      border-left: 2px solid var(--accent);
+      padding: 20px 28px;
+      margin: 32px 0;
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink);
+      border-radius: 2px;
+    }
+
+    /* Links */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    a:hover { border-bottom-color: var(--accent); }
+
+    /* Methodology footer */
+    .methodology {
+      margin-top: 96px;
+      padding: 32px 0 0;
+      border-top: 1px solid var(--rule);
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .methodology h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .methodology p {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .container { padding: 48px 24px 96px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 22px; }
+      .deck { font-size: 17px; }
+      .lede { font-size: 19px; }
+      body { font-size: 18px; }
+      .lede::first-letter { font-size: 52px; }
+      .observation { font-size: 16px; padding: 16px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="/" class="home">Emily Chen</a>
+      <a href="/">Index</a>
+    </nav>
+
+    <span class="meta-label">Quarterly Brief · No. 01</span>
+    <h1>Q1 2026 Biotech HF Positioning</h1>
+    <p class="deck">What twenty-six biotech-focused funds did in the first quarter of 2026 — and a few patterns worth paying attention to.</p>
+    <p class="byline">Published May 2026 · Derived from public 13F filings</p>
+
+    <p class="lede">
+      Every quarter, biotech-focused hedge funds disclose their long positions in 13F filings — a public, lagged window into where the smart money sits. This brief takes that data across twenty-six biotech-dedicated funds and looks for the patterns that survive aggregation: where conviction concentrates, where it scatters, what's being bought together, and what's being abandoned together.
+    </p>
+
+    <span class="section-kicker">The Landscape</span>
+    <h2>One view of the whole quarter</h2>
+
+    <p>
+      Before drilling in, the single chart that holds the most information: a fund-by-ticker signal map of the top twenty-five most widely held names, with each cell showing what each fund did with that position this quarter. Greens are positions being built (Added or New); reds are positions being reduced or exited (Trimmed or Exited); gray means the fund doesn't hold the name.
+    </p>
+
+    <div class="chart">
+      <img src="/charts/04_signal_heatmap_Q1-2026.png" alt="Fund-by-ticker signal map showing the top 25 most widely held biotech names across 26 funds, color-coded by action taken this quarter." />
+      <p class="chart-caption">Each row is a ticker; each column is a fund. Green cells indicate the fund added to or initiated the position this quarter; red cells indicate trimming or full exit; gray indicates no holding. The clustering of color tells most of the story before any single name is examined.</p>
+    </div>
+
+    <p>
+      Two things are visible at a glance. First, the top of the chart — the most widely held names — is mostly green, suggesting that the consensus longs are still being supported, not quietly distributed. Second, the picture is not monolithic: even the most-held names have a few red cells, and many tickers show both greens and reds in the same row. Funds are not moving in lockstep, even when they're holding the same names.
+    </p>
+
+    <span class="section-kicker">Consensus</span>
+    <h2>The most widely held names</h2>
+
+    <p>
+      Twenty-one tickers are held by seven or more of the twenty-six funds. The clear leader is <strong>Centessa Pharmaceuticals (CNTA)</strong>, held by thirteen funds — exactly half the coverage universe.
+    </p>
+
+    <div class="chart">
+      <img src="/charts/01_top_tickers_Q1-2026.png" alt="Bar chart of the most widely held biotech names in Q1 2026, ranked by number of funds holding." />
+      <p class="chart-caption">Number of funds (out of 26) holding each ticker. CNTA leads at 13; a cluster of four names — CGON, DNTH, ABVX, RVMD — share the second slot at 10.</p>
+    </div>
+
+    <p>
+      A useful framing: a position held by ten or more funds isn't a contrarian bet. It's a sector consensus. The interesting question is not whether to own it, but whether to be late.
+    </p>
+
+    <span class="section-kicker">Conviction</span>
+    <h2>How widely held doesn't mean how strongly held</h2>
+
+    <p>
+      Holding a name and weighting a name are different decisions. The next view plots breadth against concentration — number of funds holding (x-axis) against the average percentage weight per fund (y-axis). Four quadrants emerge.
+    </p>
+
+    <div class="chart">
+      <img src="/charts/02_conviction_scatter_Q1-2026.png" alt="Scatter plot mapping biotech tickers by number of funds holding versus average percentage weight per fund." />
+      <p class="chart-caption">Each dot is one ticker. Top-right would indicate a name that is both widely held and heavily weighted — crowded high-conviction. Top-left indicates single-fund concentration. Bottom-right indicates broad but light holdings. Most of the universe sits in the bottom-left.</p>
+    </div>
+
+    <p>
+      Three patterns stand out. <strong>SRRK</strong> sits alone in the upper-left at roughly thirty percent of one fund's book — a single-fund conviction bet that nobody else is taking. <strong>ANAB</strong> shows the same pattern, smaller in magnitude. <strong>CGON</strong>, by contrast, occupies the upper-right region: held by ten funds at an average weight near fourteen percent. That is the crowded high-conviction quadrant, and it is mostly empty — CGON is the rare name that is both widely held and heavily weighted across multiple funds.
+    </p>
+
+    <p>
+      The bulk of the universe sits in the bottom strip: held by one to five funds, at average weights under three percent. Most positions are watchlist-sized. Conviction concentrates in a handful of names.
+    </p>
+
+    <div class="observation">
+      The conviction map is the chart that distinguishes <em>what is held</em> from <em>what is believed</em>. A name held by twelve funds at one percent each is a different signal than a name held by three funds at fifteen percent each. Both are crowded; only one is conviction.
+    </div>
+
+    <span class="section-kicker">Shifts</span>
+    <h2>The largest moves of the quarter</h2>
+
+    <p>
+      Aggregating quarter-over-quarter change across all twenty-six funds surfaces the names where positioning moved most. The top additions and the top reductions tell different stories.
+    </p>
+
+    <div class="chart">
+      <img src="/charts/03_qoq_diverging_Q1-2026.png" alt="Diverging bar chart showing the largest aggregate position changes in Q1 2026 versus Q4 2025." />
+      <p class="chart-caption">Sum of position changes across the 26 funds, in percentage points. Top twelve increases and decreases shown. Stacked color segments indicate contribution from individual funds.</p>
+    </div>
+
+    <p>
+      <strong>Alumis (ALMS)</strong> shows the quarter's largest aggregate increase — plus 40.5 percentage points across seven funds, driven heavily by Foresite. <strong>Erasca (ERAS)</strong> and <strong>Dianthus (DNTH)</strong> follow with similarly broad-based accumulation across multiple funds rather than single-fund bets.
+    </p>
+
+    <p>
+      The downside is more interesting. <strong>Abivax (ABVX)</strong> appears on this chart as the largest aggregate reduction of the quarter — minus 39.6 percentage points across eleven funds. It also appears two charts above as one of the most widely held names in the universe. Held broadly, being trimmed broadly: this is the pattern of a thesis that's softening but hasn't yet been abandoned. <strong>Cidara (CDTX)</strong> and <strong>RAPT</strong> show similar broad-based reductions, but in their case the trimming has accelerated into full exits — RAPT, in particular, was abandoned by every prior holder this quarter.
+    </p>
+
+    <span class="section-kicker">Initiations</span>
+    <h2>Coordinated new positions</h2>
+
+    <p>
+      The most forward-looking signal in a 13F is the coordinated new position — names where multiple funds opened a fresh holding in the same quarter. These are the bets being placed now, not the legacy conviction being maintained.
+    </p>
+
+    <div class="chart">
+      <img src="/charts/06_new_position_spotlight_Q1-2026.png" alt="Table of new positions initiated by two or more biotech-focused hedge funds in Q1 2026." />
+      <p class="chart-caption">Names where two or more funds opened a new position in Q1 2026, ranked by number of initiating funds. Aktis Oncology and Damora Therapeutics lead at five funds each.</p>
+    </div>
+
+    <p>
+      <strong>Aktis Oncology (AKTS)</strong> and <strong>Damora Therapeutics (DMRA)</strong> were each initiated by five funds — the strongest coordinated signal of the quarter. <strong>ALX Oncology (ALXO)</strong> and <strong>Zura Bio (ZURA)</strong> follow at four funds each. These are not yet crowded names, but they are names that several independent sets of analysts independently decided were worth a position in the same window. That's a different kind of signal than the legacy consensus longs.
+    </p>
+
+    <span class="section-kicker">Exits</span>
+    <h2>Names every prior holder abandoned</h2>
+
+    <p>
+      The cleanest negative signal in the dataset: tickers where every fund that held the name in Q4 2025 had fully exited by Q1 2026. Not trimmed — exited.
+    </p>
+
+    <div class="chart">
+      <img src="/charts/07_pure_exits_Q1-2026.png" alt="Bar chart of names where every prior holder fully exited the position by Q1 2026." />
+      <p class="chart-caption">Number of funds that held the position in Q4 2025 and fully exited by Q1 2026. RAPT Therapeutics, abandoned by eight prior holders, leads the chart.</p>
+    </div>
+
+    <p>
+      Eight funds held <strong>RAPT Therapeutics</strong> at the end of last quarter; zero hold it now. Six funds did the same with <strong>Cidara (CDTX)</strong>. When the entire holder base of a name evacuates inside a single ninety-day window, the signal is harder to argue with than any single fund's decision in isolation.
+    </p>
+
+    <span class="section-kicker">Synthesis</span>
+    <h2>What this quarter actually shows</h2>
+
+    <p>
+      Three observations worth carrying forward. <strong>The consensus longs are mostly being supported, not distributed</strong> — the signal map's top rows are predominantly green, suggesting funds are still building into the names they collectively hold. <strong>Conviction is concentrated in very few names</strong> — most of the universe is held in watchlist-sized positions, with only CGON visibly occupying the crowded high-conviction quadrant. And <strong>the coordinated exits are louder than the coordinated entries</strong> — RAPT and CDTX leave their entire holder base in a single quarter, while the new-position cluster (AKTS, DMRA at five funds each) is meaningful but more modest in scale.
+    </p>
+
+    <p>
+      The descriptive read is that Q1 2026 looks like a quarter of selective reinforcement on existing winners, accompanied by surgical abandonment of names that have lost the room. The new-position cluster is the place to watch — coordinated initiations have historically been the strongest forward-looking signal in 13F data, and AKTS and DMRA are now the names with five independent analyst teams agreeing they're worth owning.
+    </p>
+
+    <p>
+      Tooling, methodology, and the analyst infrastructure that produced this brief are documented in the <a href="/projects/13f-tool.html">13F Biotech Intelligence Tool</a> writeup.
+    </p>
+
+    <div class="methodology">
+      <h3>Methodology &amp; Disclosures</h3>
+      <p>
+        Coverage universe: twenty-six biotech-focused hedge funds. Positions extracted from publicly filed 13F disclosures via WhaleWisdom and processed through the <a href="/projects/13f-tool.html">13F Intelligence Tool</a>. A policy filter restricts the dataset to healthcare-sector equities (excluding warrants, options, and convertibles) where the position represents at least 0.5% of portfolio or has changed by at least 0.25 percentage points quarter over quarter.
+      </p>
+      <p>
+        13F data is lagged by 45 days from quarter-end and reports long positions only. Short positions, derivative exposures, and intra-quarter trading are not visible. Positions reflect filings as of the reporting date; positions may have changed since.
+      </p>
+      <p>
+        This brief is for educational and informational purposes only. It is not investment advice and does not constitute a recommendation to buy, sell, or hold any security. The author is a student; analysis reflects pattern observation, not professional research.
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>
