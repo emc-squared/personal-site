@@ -1,191 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Emily Chen</title>
-  <meta name="description" content="Sophomore at Yale studying cognitive science and economics. I build tools that make complex data legible." />
+  <meta name="description" content="Sophomore at Yale studying cognitive science and economics. Building tools that make complex data legible." />
 
-  <!-- Preconnect for faster font loading -->
+  <script>document.documentElement.className = 'js';</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <!-- Newsreader (body) and Fraunces (display) — editorial pairing -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
     rel="stylesheet"
   />
 
   <style>
+    @view-transition { navigation: auto; }
+
     :root {
-      --bg: #faf7f0;
-      --ink: #1f1f1f;
-      --muted: #6b6155;
-      --accent: #5b3a29;
-      --rule: #e8e1d4;
-      --shadow: rgba(31, 31, 31, 0.04);
+      --bg: #c4e4ff;          /* cool paper white */
+      --ink: #1a2433;         /* deep navy-slate */
+      --muted: #5f6c7b;       /* slate */
+      --accent: #2f6188;      /* steel blue */
+      --accent-strong: #1d4d70;
+      --signature: #3d8bc4;   /* brighter steel — the EMC² pop */
+      --rule: #dde4ec;        /* cool hairline */
+      --card-tint: rgba(47, 97, 136, 0.05);
+      --card-border: rgba(47, 97, 136, 0.18);
+      --nav-bg: rgba(246, 248, 251, 0.82);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--ink);
       font-family: 'Newsreader', Georgia, serif;
       font-size: 19px;
-      line-height: 1.6;
-      font-weight: 400;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
 
     .container {
-      max-width: 640px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 96px 32px 128px;
-      animation: fadeIn 0.8s ease-out;
+      padding: 0 32px 128px;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* ---------- Hero ---------- */
+    .hero {
+      padding-top: 88px;
+      scroll-margin-top: 0;
     }
-
-    /* Header / wordmark */
-    .wordmark {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 80px;
-    }
-
-    /* Hero / name */
     h1.name {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 48px;
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      margin-bottom: 14px;
       font-variation-settings: 'opsz' 144;
     }
-
     .tagline {
       font-family: 'Newsreader', Georgia, serif;
       font-style: italic;
-      font-size: 19px;
+      font-size: 21px;
       color: var(--muted);
-      margin-bottom: 56px;
+      max-width: 34ch;
     }
 
-    /* Section labels (small caps) */
-    .section-label {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 24px;
-      display: block;
-    }
-
-    section {
-      margin-bottom: 72px;
-    }
-
-    section p {
-      margin-bottom: 18px;
-    }
-
-    section p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* About paragraph slightly larger */
-    .about p {
-      font-size: 20px;
-      line-height: 1.65;
-    }
-
-    /* Project list */
-    .project {
-      padding-bottom: 32px;
-      margin-bottom: 32px;
+    /* ---------- Sticky nav ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin-top: 40px;
+      margin-bottom: 64px;
+      padding: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--rule);
     }
-
-    .project:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
-    }
-
-    .project h3 {
+    .nav-mark {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      margin-bottom: 6px;
-      font-variation-settings: 'opsz' 36;
-    }
-
-    .project h3 a {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       color: var(--ink);
       border-bottom: none;
     }
+    .nav-mark sup {
+      color: var(--signature);
+      font-size: 0.65em;
+      top: -0.05em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 26px;
+    }
+    .nav-links a {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
 
-    .project h3 a:hover {
+    /* ---------- Sections ---------- */
+    section {
+      margin-bottom: 64px;
+      scroll-margin-top: 84px; /* clears the sticky nav on anchor jumps */
+    }
+    section:last-of-type { margin-bottom: 0; }
+    section p { margin-bottom: 18px; }
+    section p:last-child { margin-bottom: 0; }
+
+    .section-label {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: var(--accent);
+      margin-bottom: 22px;
+      display: block;
     }
 
+    .about p, #currently p { font-size: 20px; line-height: 1.62; max-width: 64ch; }
+
+    /* ---------- Projects (2-col grid) ---------- */
+    .projects-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .project {
+      padding: 24px;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: transparent;
+      transition: background 0.25s ease, border-color 0.25s ease,
+                  transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .project:hover {
+      background: var(--card-tint);
+      border-color: var(--card-border);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(26, 36, 51, 0.06);
+    }
+    .project h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 5px;
+      font-variation-settings: 'opsz' 36;
+    }
+    .project h3 a { color: var(--ink); border-bottom: none; }
+    .project h3 a:hover { color: var(--accent); }
     .project .status {
       font-family: 'Newsreader', Georgia, serif;
       font-style: italic;
       font-size: 14px;
-      color: var(--muted);
+      color: var(--accent);
       margin-bottom: 12px;
       display: block;
     }
-
     .project p {
-      font-size: 17px;
-      color: var(--ink);
+      font-size: 16px;
       line-height: 1.55;
+      color: var(--ink);
+      margin-bottom: 0;
     }
 
-    /* Notes list */
-    .notes-list {
-      list-style: none;
-    }
-
+    /* ---------- Notes ---------- */
+    .notes-list { list-style: none; }
     .note-item {
-      padding: 16px 0;
+      padding: 18px 0;
       border-bottom: 1px solid var(--rule);
     }
-
-    .note-item:last-child {
-      border-bottom: none;
-    }
-
+    .note-item:first-child { border-top: 1px solid var(--rule); }
     .note-item a {
       display: flex;
       justify-content: space-between;
@@ -193,20 +199,16 @@
       gap: 24px;
       text-decoration: none;
       color: var(--ink);
+      border-bottom: none;
       transition: color 0.2s ease;
     }
-
-    .note-item a:hover {
-      color: var(--accent);
-    }
-
+    .note-item a:hover { color: var(--accent); }
     .note-title {
       font-family: 'Fraunces', Georgia, serif;
       font-size: 18px;
       font-weight: 500;
       letter-spacing: -0.005em;
     }
-
     .note-date {
       font-family: 'Newsreader', Georgia, serif;
       font-style: italic;
@@ -215,162 +217,195 @@
       white-space: nowrap;
     }
 
-    .notes-empty {
-      font-style: italic;
-      color: var(--muted);
-      font-size: 17px;
-    }
-
-    /* Links */
+    /* ---------- Links ---------- */
     a {
       color: var(--accent);
       text-decoration: none;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    a:hover { border-bottom-color: var(--accent); }
+
+    .contact a { display: inline-block; margin-right: 22px; font-size: 17px; }
+    .contact a:last-child { margin-right: 0; }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    /* ---------- Motion ---------- */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    html.js h1.name,
+    html.js .tagline {
+      opacity: 0;
+      animation: riseIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    html.js h1.name  { animation-delay: 0.08s; }
+    html.js .tagline { animation-delay: 0.22s; }
+
+    html.js [data-reveal] {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    html.js [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html.js h1.name,
+      html.js .tagline,
+      html.js [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        transition: none !important;
+      }
+      html { scroll-behavior: auto; }
     }
 
-    a:hover {
-      border-bottom-color: var(--accent);
+    /* ---------- Mobile ---------- */
+    @media (max-width: 640px) {
+      .container { padding: 0 22px 96px; }
+      .hero { padding-top: 56px; }
+      h1.name { font-size: 38px; }
+      .tagline { font-size: 18px; }
+      body { font-size: 18px; }
+      .about p, #currently p { font-size: 18px; }
+      .nav { margin-top: 32px; margin-bottom: 48px; padding: 13px 0; }
+      .nav-mark { font-size: 15px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 11px; letter-spacing: 0.07em; }
+      .projects-list { grid-template-columns: 1fr; }
+      .note-item a { flex-direction: column; gap: 4px; }
     }
 
-    /* Contact block */
-    .contact a {
-      display: inline-block;
-      margin-right: 20px;
-      font-size: 17px;
-    }
-
-    /* Horizontal rule between major sections */
-    .divider {
-      width: 32px;
-      height: 1px;
-      background: var(--rule);
-      border: none;
-      margin: 0 0 48px;
-    }
-
-    /* Mobile responsive */
-    @media (max-width: 600px) {
-      .container {
-        padding: 64px 24px 96px;
-      }
-
-      h1.name {
-        font-size: 36px;
-      }
-
-      body {
-        font-size: 18px;
-      }
-
-      .note-item a {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .note-date {
-        font-size: 13px;
-      }
-    }
-
-    /* Selection */
-    ::selection {
-      background: var(--accent);
-      color: var(--bg);
+    /* Very small screens: drop the nav mark so links never crowd */
+    @media (max-width: 380px) {
+      .nav-mark { display: none; }
+      .nav { justify-content: center; }
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <!-- Wordmark / initials -->
-    <div class="wordmark">EMC</div>
 
-    <!-- Hero -->
-    <h1 class="name">Emily Chen</h1>
-    <p class="tagline">Sophomore at Yale, studying cognitive science. Building tools for biotech research.</p>
+    <header class="hero" id="top">
+      <h1 class="name">Emily Chen</h1>
+      <p class="tagline">Sophomore at Yale studying cognitive science and economics. I build tools that make complex data legible.</p>
+    </header>
 
-    <hr class="divider" />
-
-    <!-- About -->
-    <section class="about">
-      <span class="section-label">About</span>
-      <p>
-        I'm a sophomore at Yale studying cognitive science and economics, drawn to the places where behavior and markets meet. I'm interested in how complex data becomes legible — and in building tools that close the gap between raw information and the decisions people actually make from it. 
-        Currently spending the first part of the summer at Bluestar Global Management, a biotech-focused hedge fund, where I'm building research infrastructure and developing a view on emerging therapeutic areas. Originally from Hong Kong.
-      </p>
-    </section>
-
-    <!-- Currently -->
-    <section>
-      <span class="section-label">Currently</span>
-      <p>
-        Building an earnings call language analyzer for big biotech names – looking for patterns in management hedging, confidence shifts, and tone deltas across quarters. In parallel, researching the psychedelics therapeutic landscape – mapping the public and private companies developing compounds across clinical stages and indications. Building a public version of that landscape here.
-      </p>
-    </section>
-
-    <!-- Projects -->
-    <section>
-      <span class="section-label">Projects</span>
-
-      <div class="project">
-        <h3><a href="/projects/13f-tool.html">13F Intelligence Tool</a></h3>
-        <span class="status">In production at a biotech hedge fund</span>
-        <p>
-          Ingests 13F filings from biotech-focused hedge funds, parses positioning data, and
-          surfaces consensus holdings, exit positions, and concentration changes — collapsing what
-          was a multi-hour manual workflow into a single command. Built with Claude Code.
-        </p>
+    <nav class="nav">
+      <a href="#top" class="nav-mark">EMC<sup>2</sup></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#notes">Notes</a>
+        <a href="#contact">Contact</a>
       </div>
+    </nav>
 
-      <div class="project">
-        <h3>Earnings Call Language Analyzer</h3>
-        <span class="status">In development — summer 2026</span>
+    <main>
+      <section id="about" class="about" data-reveal>
+        <span class="section-label">About</span>
         <p>
-          Analyzes biotech earnings call transcripts for hedging language, confidence signals, and tone shifts quarter over quarter, synthesizing everything into charts easy to visualize and interpret.
+          I'm a sophomore at Yale studying cognitive science and economics, drawn to the places where behavior and markets meet. I'm interested in how complex data becomes legible — and in building tools that close the gap between raw information and the decisions people actually make from it.
         </p>
-      </div>
-
-      <div class="project">
-        <h3>Biotech Research Agent</h3>
-        <span class="status">In development — summer 2026 / fall 2026</span>
         <p>
-          An autonomous research agent that takes a ticker and assembles a structured research memo – chaining 13F positioning, earnings language analysis, clinical trial data, and FDA calendar events.
+          Currently spending the first part of the summer at Bluestar Global Management, a biotech-focused hedge fund, where I'm building research infrastructure and developing a view on emerging therapeutic areas. Originally from Hong Kong.
         </p>
-      </div>
+      </section>
 
-      <div class="project">
-        <h4>Psychedelics Therapeutics Landscape</h4>
-        <span class="status">ongoing</span>
+      <section id="currently" data-reveal>
+        <span class="section-label">Currently</span>
         <p>
-          A maintained map of the companies developing psychedelic-assisted therapies – public and private, organized by compound, clinical stage, and indication. An attempt to make a fast-moving, under-documented corner of biotech legible.
+          Building an earnings call language analyzer for biotech names — looking for patterns in management hedging, confidence shifts, and tone deltas across quarters. In parallel, researching the psychedelics therapeutic landscape — mapping the public and private companies developing compounds across clinical stages and indications. Building a public version of that landscape here.
         </p>
-      </div>
-      
-    </section>
+      </section>
 
-    <!-- Notes -->
-    <section>
-      <span class="section-label">Notes</span>
-      <ul class="notes-list">
-        <li class="note-item">
-          <a href="/notes/q1-2026-biotech-positioning.html">
-            <span class="note-title">Q1 2026 Biotech HF Positioning</span>
-            <span class="note-date">May 2026</span>
-          </a>
-        </li>
-      </ul>
-    </section>
+      <section id="projects" data-reveal>
+        <span class="section-label">Projects</span>
+        <div class="projects-list">
 
-    <!-- Contact -->
-    <section class="contact">
-      <span class="section-label">Contact</span>
-      <p>
-        <a href="mailto:emily.chen.eyc36@yale.edu">Email</a>
-        <a href="https://www.linkedin.com/in/emilychen07" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/emc-squared" target="_blank" rel="noopener">GitHub</a>
-      </p>
-    </section>
+          <div class="project">
+            <h3><a href="/projects/13f-tool.html">13F Intelligence Tool</a></h3>
+            <span class="status">In production at a biotech hedge fund</span>
+            <p>
+              Ingests 13F filings from biotech-focused hedge funds, parses positioning data, and surfaces consensus holdings, exit positions, and concentration changes — collapsing what was a multi-hour manual workflow into a single command. Built with Claude Code.
+            </p>
+          </div>
+
+          <div class="project">
+            <h3>Earnings Call Language Analyzer</h3>
+            <span class="status">In development — summer 2026</span>
+            <p>
+              Analyzes biotech earnings call transcripts for hedging language, confidence signals, and tone shifts quarter over quarter, synthesizing everything into charts that are easy to visualize and interpret.
+            </p>
+          </div>
+
+          <div class="project">
+            <h3>Biotech Research Agent</h3>
+            <span class="status">In development — summer 2026 / fall 2026</span>
+            <p>
+              An autonomous research agent that takes a ticker and assembles a structured research memo — chaining 13F positioning, earnings language analysis, clinical trial data, and FDA calendar events.
+            </p>
+          </div>
+
+          <div class="project">
+            <h3>Psychedelics Therapeutics Landscape</h3>
+            <span class="status">Ongoing</span>
+            <p>
+              A maintained map of the companies developing psychedelic-assisted therapies — public and private, organized by compound, clinical stage, and indication. An attempt to make a fast-moving, under-documented corner of biotech legible.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="notes" data-reveal>
+        <span class="section-label">Notes</span>
+        <ul class="notes-list">
+          <li class="note-item">
+            <a href="/notes/q1-2026-biotech-positioning.html">
+              <span class="note-title">Q1 2026 Biotech HF Positioning</span>
+              <span class="note-date">May 2026</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section id="contact" class="contact" data-reveal>
+        <span class="section-label">Contact</span>
+        <p>
+          <a href="mailto:emily.chen.eyc36@yale.edu">Email</a>
+          <a href="https://www.linkedin.com/in/emilychen07" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/emc-squared" target="_blank" rel="noopener">GitHub</a>
+        </p>
+      </section>
+    </main>
+
   </div>
+
+  <script>
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var els = document.querySelectorAll('[data-reveal]');
+      if (reduced || !('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { obs.observe(el); });
+    })();
+  </script>
+
 </body>
 </html>
