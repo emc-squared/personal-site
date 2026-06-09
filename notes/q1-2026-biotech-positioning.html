@@ -25,6 +25,7 @@
       --code-bg: #eef2f7;          /* tool page only — was cream */
       --pullquote-bg: #eef2f7;     /* brief only — was cream */
       --card-tint: rgba(47, 97, 136, 0.05);
+      --nav-bg: rgba(246, 248, 251, 0.82);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,24 +57,55 @@
 
     /* Nav */
     .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin-bottom: 56px;
+      padding: 15px 0;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 64px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-mark {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      border-bottom: none;
+    }
+    .nav-mark sup {
+      color: var(--signature);
+      font-size: 0.65em;
+      top: -0.05em;
+    }
+    .nav-links { display: flex; gap: 26px; }
+    .nav-links a {
       font-family: 'Fraunces', Georgia, serif;
       font-size: 13px;
-      letter-spacing: 0.08em;
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-    }
-
-    .nav a {
       color: var(--muted);
-      text-decoration: none;
+      border-bottom: none;
       transition: color 0.2s ease;
     }
+    .nav-links a:hover { color: var(--accent); }
 
-    .nav a:hover { color: var(--accent); }
-    .nav .home { font-weight: 500; }
+    @media (max-width: 640px) {
+      .nav { padding: 13px 0; margin-bottom: 40px; }
+      .nav-mark { font-size: 15px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 11px; letter-spacing: 0.07em; }
+    }
+    @media (max-width: 380px) {
+      .nav-mark { display: none; }
+      .nav { justify-content: center; }
+    }
 
     /* Header */
     .meta-label {
@@ -272,8 +304,13 @@
   <div class="container">
 
     <nav class="nav">
-      <a href="/" class="home">Emily Chen</a>
-      <a href="/">Index</a>
+      <a href="/" class="nav-mark">EMC<sup>2</sup></a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#notes">Notes</a>
+        <a href="/#contact">Contact</a>
+      </div>
     </nav>
 
     <span class="meta-label">Quarterly Brief · No. 01</span>
