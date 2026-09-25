@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q2 2026 Biotech HF Positioning Brief — Emily Chen</title>
+  <meta name="description" content="Quarterly brief on biotech hedge fund positioning, derived from public 13F filings across 26 biotech-focused funds." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --ink: #1a2433;
+      --muted: #5f6c7b;
+      --accent: #2f6188;
+      --accent-strong: #1d4d70;
+      --signature: #3d8bc4;
+      --rule: #dde4ec;
+      --code-bg: #eef2f7;          /* tool page only — was cream */
+      --pullquote-bg: #eef2f7;     /* brief only — was cream */
+      --card-tint: rgba(47, 97, 136, 0.05);
+      --nav-bg: rgba(246, 248, 251, 0.82);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.7;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 32px 128px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin-bottom: 56px;
+      padding: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-mark {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      border-bottom: none;
+    }
+    .nav-mark sup {
+      color: var(--signature);
+      font-size: 0.65em;
+      top: -0.05em;
+    }
+    .nav-links { display: flex; gap: 26px; }
+    .nav-links a {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    @media (max-width: 640px) {
+      .nav { padding: 13px 0; margin-bottom: 40px; }
+      .nav-mark { font-size: 15px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 11px; letter-spacing: 0.07em; }
+    }
+    @media (max-width: 380px) {
+      .nav-mark { display: none; }
+      .nav { justify-content: center; }
+    }
+
+    /* Header */
+    .meta-label {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 44px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+      font-variation-settings: 'opsz' 144;
+    }
+
+    .deck {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .byline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 56px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* Lede */
+    .lede {
+      font-size: 21px;
+      line-height: 1.55;
+      margin-bottom: 48px;
+      color: var(--ink);
+    }
+
+    .lede::first-letter {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 64px;
+      font-weight: 500;
+      float: left;
+      line-height: 0.9;
+      padding: 6px 10px 0 0;
+      color: var(--accent);
+      font-variation-settings: 'opsz' 144;
+    }
+
+    /* Section headings */
+    h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      margin-top: 64px;
+      margin-bottom: 12px;
+      font-variation-settings: 'opsz' 36;
+    }
+
+    .section-kicker {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 64px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-kicker + h2 {
+      margin-top: 0;
+    }
+
+    /* Body */
+    p {
+      margin-bottom: 20px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    em, i {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: 500;
+    }
+
+    /* Charts */
+    .chart {
+      margin: 36px 0 12px;
+    }
+
+    .chart img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+    }
+
+    .chart-caption {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 12px;
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+
+    /* Pull quote / observation */
+    .observation {
+      background: var(--pullquote-bg);
+      border-left: 2px solid var(--accent);
+      padding: 20px 28px;
+      margin: 32px 0;
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink);
+      border-radius: 2px;
+    }
+
+    /* Links */
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    a:hover { border-bottom-color: var(--accent); }
+
+    /* Methodology footer */
+    .methodology {
+      margin-top: 96px;
+      padding: 32px 0 0;
+      border-top: 1px solid var(--rule);
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .methodology h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .methodology p {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .container { padding: 48px 24px 96px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 22px; }
+      .deck { font-size: 17px; }
+      .lede { font-size: 19px; }
+      body { font-size: 18px; }
+      .lede::first-letter { font-size: 52px; }
+      .observation { font-size: 16px; padding: 16px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="/" class="nav-mark">EMC<sup>2</sup></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/#about">About</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#notes">Notes</a>
+        <a href="/#contact">Contact</a>
+      </div>
+    </nav>
+
+    <span class="meta-label">Quarterly Brief · No. 02</span>
+    <h1>2026 Biotech HF Positioning —— Q2</h1>
+    <p class="deck">What twenty-five biotech-focused and general funds did in the second quarter of 2026 — and, for the first time, how that compares with what they did the quarter before.</p>
+    <p class="byline">Published September 2026 · Derived from public 13F filings</p>
+
+    <p class="lede">
+      The <a href="/notes/q1-2026-biotech-positioning.html">Q1 brief</a> was a snapshot. With a second quarter of data, the more useful question changes from &ldquo;what do these funds own?&rdquo; to &ldquo;what are they still doing?&rdquo; This brief repeats the Q1 views on Q2 filings, then adds three quarter-over-quarter charts that track whether positioning persisted, reversed, or disappeared &mdash; and checks how the patterns flagged last quarter actually played out.
+    </p>
+
+    <span class="section-kicker">The Landscape</span>
+    <h2>Overview whole quarter</h2>
+
+    <p>
+      As in Q1, the starting point is the fund-by-ticker signal map for the twenty-five most widely held names. Greens are positions being built (Added or New), reds are positions being reduced or exited (Trimmed or Exited), and gray means the fund doesn&rsquo;t hold the name.
+    </p>
+    <div class="chart">
+      <img src="/charts/04_signal_heatmap_Q2-2026.png" alt="Fund-by-ticker signal map showing the top 25 most widely held biotech names across 25 funds, color-coded by action taken in Q2 2026." />
+      <p class="chart-caption">Each row is a ticker; each column is a fund. Green cells indicate the fund added to or initiated the position this quarter; red cells indicate trimming or full exit; gray indicates no holding.</p>
+    </div>
+
+    <p>
+      Reading across rows, two names are unusually one-directional. <strong>PBLS</strong> (Parabilis Medicines) is solid dark green: every one of its seven holders opened the position this quarter. That&rsquo;s less dramatic than it looks &mdash; Parabilis only began trading on June 10, so every holder is &ldquo;new&rdquo; by definition. The row records an IPO, not seven funds changing their minds. <strong>XENE</strong> is the opposite &mdash; all eight holders trimmed and none added, the cleanest &ldquo;held broadly, reduced broadly&rdquo; row on the map. It echoes ABVX in Q1: nobody has left, but no one is adding either.
+    </p>
+
+    <p>
+      <strong>ODTX</strong> (Odyssey Therapeutics, listed in May) shows the same IPO pattern. <strong>AURA</strong> (Aura Biosciences) is the more interesting cluster of dark-green initiations, because it was already a listed company. The rest of the map is more mixed than it was in Q1. That mix is the first hint of the quarter&rsquo;s main theme: a lot of positioning changed direction.
+    </p>
+
+    <span class="section-kicker">Consensus</span>
+    <h2>The most widely held names</h2>
+
+    <p>
+      The Q1 leader, Centessa (CNTA), is gone from the list entirely &mdash; not because funds lost conviction, but because Eli Lilly acquired it (more on that below). The top slot is now a three-way tie at ten funds: <strong>Pharvaris (PHVS)</strong>, <strong>Abivax (ABVX)</strong>, and <strong>Tango (TNGX)</strong>, followed by CGON, RVMD, and COGT at nine.
+    </p>
+    <div class="chart">
+      <img src="/charts/01_top_tickers_Q2-2026.png" alt="Bar chart of the most widely held biotech names in Q2 2026, ranked by number of funds holding." />
+      <p class="chart-caption">Number of funds (out of 25) holding each ticker. PHVS, ABVX, and TNGX lead at 10; CGON, RVMD, and COGT follow at 9.</p>
+    </div>
+
+    <p>
+      ABVX is the interesting survivor. In Q1 it was the reddest row on the signal map, trimmed broadly by eleven holders. In Q2 it is still held by ten funds, and its dominant action flipped from trimming to adding &mdash; a reminder that one quarter of broad trimming is not a verdict.
+    </p>
+
+    <span class="section-kicker">Conviction</span>
+    <h2>Breadth versus concentration</h2>
+
+    <p>
+      The same breadth-versus-weight view as last quarter: number of funds holding a name (horizontal) against the average position size among those holders (vertical).
+    </p>
+    <div class="chart">
+      <img src="/charts/02_conviction_scatter_Q2-2026.png" alt="Scatter plot mapping biotech tickers by number of funds holding versus average percentage weight per fund, Q2 2026." />
+      <p class="chart-caption">Each dot is one ticker; 306 names tracked across 25 funds. Top-right would indicate crowded high conviction; top-left, single-fund concentration; bottom-right, broad but light holdings.</p>
+    </div>
+
+    <p>
+      The top-right corner is still nearly empty. <strong>CGON</strong> remains the only name that is both widely held (nine funds) and heavily weighted (around 16% on average). The names tied for most widely held &mdash; PHVS, ABVX, TNGX &mdash; all sit well below 10% average weight: consensus, but sized as consensus rather than as a thesis.
+    </p>
+
+    <p>
+      The top-left corner changed. In Q1, SRRK sat almost alone as a single-fund bet worth roughly 30% of one book. This quarter Redmile cut that position sharply, and SRRK drops to a two-fund name at around 8%. <strong>ANAB</strong> now occupies that corner at roughly 25% of a single fund&rsquo;s portfolio. Single-fund conviction is a real signal, but SRRK is a good example of how quickly it can unwind &mdash; and why one quarter of it is not enough to call it a trend.
+    </p>
+
+    <span class="section-kicker">Shifts</span>
+    <h2>The largest moves of the quarter</h2>
+
+    <p>
+      Aggregate quarter-over-quarter change across the twenty-five funds, with stacked segments showing whether a move came from many funds nudging a position or one fund moving a lot.
+    </p>
+    <div class="chart">
+      <img src="/charts/03_qoq_diverging_Q2-2026.png" alt="Diverging bar chart showing the largest aggregate position changes in Q2 2026 versus Q1 2026." />
+      <p class="chart-caption">Sum of position changes across 25 funds, in percentage points. Top twelve increases and decreases shown. Stacked color segments indicate contribution from individual funds.</p>
+    </div>
+
+    <p>
+      On the buy side, <strong>PBLS</strong> leads at +19.4pp across seven funds &mdash; all of it from positions created by its June IPO. <strong>RVMD</strong> (+16.9pp, ten funds) is the steadier story: an already widely held name that funds kept building. <strong>LQDA</strong> (+11.0pp) is the concentrated counterexample, with most of the move coming from a single fund across only three holders.
+    </p>
+
+    <p>
+      <strong>Definium (DFTX)</strong> at +12.0pp across five funds is worth a note. The company reported positive Phase 3 data on June 22 and closed an upsized equity offering days later, both before quarter-end. Some of this increase likely reflects funds participating in that raise rather than buying in the open market &mdash; 13F data can&rsquo;t distinguish the two, but the timing makes it the more likely reading.
+    </p>
+
+    <p>
+      On the reduction side, CNTA&rsquo;s &minus;55.2pp across twelve funds is mechanical: Eli Lilly completed its acquisition of Centessa on June 24, so every holder was cashed out before quarter-end. The discretionary reductions are <strong>TYRA</strong> (&minus;26.7pp, eight funds) and <strong>ERAS</strong> (&minus;23.7pp, six funds) &mdash; but both are dominated by one or two funds (Canaan for TYRA; 5AM and Vivo for ERAS), so they say more about those books than about the sector.
+    </p>
+
+    <span class="section-kicker">Initiations</span>
+    <h2>Coordinated new positions &mdash; and the IPO effect</h2>
+
+    <div class="chart">
+      <img src="/charts/06_new_position_spotlight_Q2-2026.png" alt="Table of new positions initiated by two or more biotech-focused hedge funds in Q2 2026." />
+      <p class="chart-caption">Names where two or more funds opened a new position in Q2 2026, ranked by number of initiating funds. Several of the top names listed on Nasdaq during the quarter.</p>
+    </div>
+
+    <p>
+      At first glance the coordinated-initiation signal looks much stronger than in Q1: <strong>PBLS</strong> at seven funds, <strong>ODTX</strong> and <strong>AURA</strong> at six. But most of the top of this table is companies that went public during Q2 &mdash; Parabilis (PBLS) in June, Odyssey (ODTX) in May, plus Kailera (KLRA), Hemab (COAG), and Avalyn (AVLN) &mdash; and First Tracks (TRAX) is a spinoff from AnaptysBio, so some of its holders received shares rather than bought them.
+    </p>
+
+    <p>
+      That matters because crossover funds often invest in a company before it lists. When it IPOs, the private stake becomes a listed position and appears in the 13F as &ldquo;New&rdquo; &mdash; RA Capital, for example, was a principal pre-IPO shareholder of Parabilis, and Foresite and OrbiMed backed Odyssey privately. In the Q1 brief I noted that private holdings are invisible in 13F data; this is the other side of that coin, the moment they become visible. Buying into an IPO is still a real decision, but a pre-IPO stake converting into public shares is not a new one, and 13F data can&rsquo;t tell the two apart.
+    </p>
+
+    <p>
+      Setting the IPOs and the spinoff aside, the strongest coordinated initiation in an already-listed company is <strong>AURA</strong> at six funds, followed by a group at three (including SMMT, SGMT, AVTX, and EDIT). That is a more modest signal than the headline table suggests &mdash; and a lesson I&rsquo;ll carry forward: check listing dates before reading &ldquo;New&rdquo; as conviction.
+    </p>
+
+    <span class="section-kicker">Exits</span>
+    <h2>Names every prior holder abandoned</h2>
+    <div class="chart">
+      <img src="/charts/07_pure_exits_Q2-2026.png" alt="Bar chart of names where every Q1 holder had fully exited by Q2 2026." />
+      <p class="chart-caption">Number of funds that held the position in Q1 2026 and fully exited by Q2 2026. The top three &mdash; CNTA, SLNO, and TERN &mdash; were all acquired.</p>
+    </div>
+
+    <p>
+      On its face this chart shows funds dumping names. For the top three it shows something else: <strong>each company was bought.</strong>
+    </p>
+
+    <p>
+      <strong>Centessa (CNTA), twelve funds.</strong> Eli Lilly agreed to acquire Centessa on March 31 for $38 per share in cash plus a contingent value right worth up to $9 more, and completed the deal on June 24. The stock was delisted before quarter-end, so all twelve holders were cashed out &mdash; none of them chose to sell.<br />
+      <strong>Terns (TERN), six funds.</strong> Merck acquired Terns for $53 per share in cash; the deal closed on May 5.<br />
+      <strong>Soleno (SLNO), six funds.</strong> Neurocrine agreed on April 6 to acquire Soleno for $53 per share in cash, with holders tendering or selling into the deal.
+    </p>
+
+    <p>
+      This is the same caveat as RAPT and CDTX in Q1, only larger: a takeover produces a full exit with no loss of conviction behind it. It also turns this chart into a scorecard of sorts. CNTA was the most uniformly green row in the Q1 signal map, held by thirteen funds; one quarter later it was bought at a large premium. Broad, supported consensus isn&rsquo;t always &ldquo;being late&rdquo; &mdash; sometimes it&rsquo;s being right. Below the top three, the exits are small (four funds or fewer) and the reasons aren&rsquo;t visible in the data.
+    </p>
+
+    <span class="section-kicker">Quarter over quarter</span>
+    <h2>What persisted, and what reversed</h2>
+
+    <p>
+      The three charts below only exist because there are now two quarters of data. The first classifies every ticker by its dominant action in Q1 and again in Q2.
+    </p>
+    <div class="chart">
+      <img src="/charts/08_two_quarter_trajectory_Q1-Q2-2026.png" alt="Four-by-four matrix classifying tickers by dominant fund action in Q1 2026 versus Q2 2026." />
+      <p class="chart-caption">Rows are the dominant action in Q1; columns are the dominant action in Q2. Green cells indicate building in both quarters, red cells exiting in both, amber cells a reversal of direction. 25 funds common to both quarters.</p>
+    </div>
+
+    <p>
+      Adding up the cells: 87 tickers were built in both quarters, 57 were reduced in both, and 144 &mdash; half the universe &mdash; reversed direction. That&rsquo;s the headline of Q2: this was a rotation quarter, not a continuation one.
+    </p>
+
+    <p>
+      It also lets me check last quarter&rsquo;s calls. Of the Q1 coordinated initiations, <strong>AKTS</strong> followed through (New &rarr; Added) and sits among the names building consensus in both quarters. <strong>DMRA</strong>, tied with AKTS at five initiating funds in Q1, reversed (New &rarr; Trimmed), and ZURA was exited entirely. In hindsight, AKTS was itself a January 2026 IPO, so part of its Q1 &ldquo;coordinated initiation&rdquo; was the same IPO effect described above &mdash; a correction to how I read it last quarter. Coordinated initiations can be a strong signal, but in this sample it held for one of the top two names, not both.
+    </p>
+    <div class="chart">
+      <img src="/charts/09_breadth_migration_Q1-Q2-2026.png" alt="Arrow chart showing each top-35 ticker moving from its Q1 to its Q2 position in breadth versus average weight." />
+      <p class="chart-caption">Each arrow runs from a ticker&rsquo;s Q1 position to its Q2 position. Green indicates breadth or conviction rising; red falling; gray unchanged.</p>
+    </div>
+
+    <p>
+      The migration chart shows which way names moved in the breadth-versus-weight plane. <strong>PHVS</strong> is the clearest upward mover &mdash; from seven funds to ten, with average weight roughly doubling &mdash; which is how it joined the top of the most-widely-held list. CNTA&rsquo;s long arrow to zero is the Lilly acquisition, not a loss of conviction.
+    </p>
+    <div class="chart">
+      <img src="/charts/10_net_rotation_summary_Q1-Q2-2026.png" alt="Three-column summary of new adds, consensus building in both quarters, and reversals from Q1 to Q2 2026." />
+      <p class="chart-caption">Net Signal = number of funds New + Added &minus; Trimmed &minus; Exited, summed across funds. 25 funds common to both quarters.</p>
+    </div>
+
+    <p>
+      The net rotation summary condenses all of this into three lists. <strong>TNGX</strong> leads the consensus-building column at +10, the most one-directional support of any name across both quarters. Two psychedelics names appear in the same column &mdash; <strong>DFTX</strong> (+5) and <strong>GHRS</strong> (+3), both names from the psychedelics sector. The new-adds column is led largely by fresh IPOs (SPTX, PBLS, KLRA, and others), for the reasons above. The reversals column is led by CNTA &mdash; the acquisition, not a reversal of view &mdash; and then <strong>XENE</strong> (&minus;8), consistent with its all-red row on the signal map.
+    </p>
+
+    <span class="section-kicker">Context</span>
+    <h2>How concentrated are the funds themselves?</h2>
+    <div class="chart">
+      <img src="/charts/05_fund_concentration_Q2-2026.png" alt="Bar chart of the share of each fund&rsquo;s reported portfolio held in its top ten positions, Q2 2026." />
+      <p class="chart-caption">Sum of portfolio weight in each fund&rsquo;s top ten holdings (active positions only). Foresite shown as the average of three sub-fund entities.</p>
+    </div>
+
+    <p>
+      One more piece of context for weighting all of the above. At one end, Decheng holds 98% of its reported book in its top ten names; at the other, Canaan holds under 19%. A new position from a highly concentrated fund is a much bigger decision than the same entry from a diversified one &mdash; which is why the stacked bars in the shifts chart matter as much as the totals.
+    </p>
+
+    <span class="section-kicker">Synthesis</span>
+    <h2>What this quarter actually shows</h2>
+
+    <p>
+      Three observations worth carrying forward. <strong>Q2 was a rotation quarter</strong> &mdash; half the universe changed direction from Q1, far more than persisted in either direction. <strong>M&amp;A did a lot of the work</strong> &mdash; the largest &ldquo;exits&rdquo; were takeovers, including the Q1 consensus leader, which reads less as abandonment and more as consensus being validated. And <strong>the IPO window shaped the new-position data</strong> &mdash; most of the quarter&rsquo;s biggest coordinated initiations were fresh listings where pre-IPO stakes became visible, and the organic signal in already-listed names (led by AURA) is more modest.
+    </p>
+
+    <p>
+      The names to watch into Q3 are the ones that sit on both sides of that picture: AURA and the other organic Q2 initiations (do they follow through like AKTS, or reverse like DMRA?), and whether the new IPO holders add or sell once lock-ups expire and the consensus-builders in both quarters, led by TNGX. Q3 filings will be the first real test of whether coordinated entries predict continued building.
+    </p>
+
+    <p>
+      Tooling, methodology, and the analyst infrastructure that produced this brief are documented in the <a href="/projects/13f-tool.html">13F Biotech Intelligence Tool</a> writeup.
+    </p>
+
+    <div class="methodology">
+      <h3>Methodology &amp; Disclosures</h3>
+      <p>
+        Coverage universe: twenty-five biotech-focused hedge funds. One fund from the Q1 universe (Braidwell) is excluded from Q2 because its source pages could not be captured cleanly; all quarter-over-quarter comparisons use the twenty-five funds common to both quarters, so Q1 counts in this brief may differ slightly from the Q1 brief. Positions extracted from publicly filed 13F disclosures via WhaleWisdom and processed through the <a href="/projects/13f-tool.html">13F Intelligence Tool</a>. A policy filter restricts the dataset to healthcare-sector equities (excluding warrants, options, and convertibles) where the position represents at least 0.5% of portfolio or has changed by at least 0.25 percentage points quarter over quarter. In Q1, non-healthcare names and options/warrant rows were removed manually after extraction; from Q2 the same rules are applied programmatically to each row, which may produce small differences between the two quarters.
+      </p>
+      <p>
+        13F data is lagged by 45 days from quarter-end and reports long positions only. Short positions, derivative exposures, and intra-quarter trading are not visible. Positions reflect filings as of the reporting date; positions may have changed since.
+      </p>
+      <p>
+        This brief is for educational and informational purposes only. It is not investment advice and does not constitute a recommendation to buy, sell, or hold any security. The author is a student; analysis reflects pattern observation, not professional research.
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>
